@@ -6,232 +6,413 @@ from utils.streamlit_utils import hide_icons, hide_sidebar, remove_whitespaces
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed", page_title="Academics Certificate System")
 remove_whitespaces()
 
-st.markdown("""
-    <style>
-    /* Global Reset */
-    .stApp {
-        background-color: #f0f2f5 !important;
-        color: #212529 !important;
-    }
 
-    /* Container for better responsiveness */
-    .content-container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-    }
+def run():
+    st.markdown("""
+        <style>
+        /* Global Reset with Modern Dark Theme */
+        .stApp {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+            color: #f8fafc !important;
+            min-height: 100vh;
+        }
 
-    /* Main title */
-    .main-title {
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #1e2c4c;
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.02em;
-    }
+        /* Container for better responsiveness */
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
 
-    /* Subheading */
-    .subheading {
-        text-align: center;
-        font-size: 1.2rem;
-        color: #4a5568;
-        margin-bottom: 2rem;
-        font-weight: 400;
-    }
+        /* Main title with cyan accent */
+        .main-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800
+        }
 
-    /* Form and Input Styles */
-    .form-container {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        padding: 2.5rem;
-        margin-bottom: 2rem;
-        max-width: 650px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+        /* Subheading */
+        .subheading {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
 
-    .form-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #1e2c4c;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-    
-    /* ALL text content forced to visible color */
-    .stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown div,
-    .stRadio, .stRadio label, .stRadio span, .stRadio div,
-    .stCheckbox, .stCheckbox label, .stCheckbox span, .stCheckbox div,
-    .stTextInput, .stTextInput label, .stTextInput span, .stTextInput div,
-    .stButton, .stButton label, .stButton span, .stButton div,
-    .stSubheader, label, p, span, div, h1, h2, h3, h4, h5, h6 {
-        color: #1e2c4c !important;
-    }
-    
-    /* Exceptions for button text */
-    .stButton > button {
-        color: white !important;
-    }
-    
-    /* Section headers */
-    .section-header {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #1e2c4c !important;
-        margin-top: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    /* Account type radio buttons enhancement */
-    .stRadio > div > div > label {
-        color: #1e2c4c !important;
-        font-weight: 500 !important;
-    }
-    
-    /* Input fields styling */
-    .stTextInput > label {
-        font-weight: 500 !important;
-        color: #1e2c4c !important;
-        font-size: 1rem !important;
-    }
-    
-    .stTextInput > div > div > input {
-        border-radius: 6px !important;
-        border: 1px solid #cbd5e0 !important;
-        padding: 0.75rem 1rem !important;
-        color: #1a202c !important;
-        background-color: #f8fafc !important;
-    }
-    
-    /* Checkbox label styling */
-    .stCheckbox > div > div > label {
-        color: #1e2c4c !important;
-        font-weight: 500 !important;
-    }
-    
-    /* Button styling */
-    .stButton > button {
-        background-color: #1e40af !important;
-        color: white !important;
-        font-weight: 600 !important;
-        padding: 0.75rem 1.5rem !important;
-        border-radius: 6px !important;
-        width: 100% !important;
-        transition: all 0.2s ease !important;
-        border: none !important;
-        margin-top: 1rem !important;
-    }
-    
-    .stButton > button:hover {
-        background-color: #1e3a8a !important;
-        transform: translateY(-1px) !important;
-    }
-    
-    /* Login link styling */
-    .login-link {
-        text-align: center;
-        margin-top: 1.5rem;
-        font-size: 0.95rem;
-    }
-    
-    .login-link a {
-        color: #1e40af !important;
-        text-decoration: none;
-        font-weight: 500;
-    }
-    
-    /* Footer */
-    .footer {
-        text-align: center;
-        margin-top: 2rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        color: #4a5568;
-        font-size: 0.85rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
+        /* Form container with dark glass effect */
+        .form-container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-st.markdown('<div class="content-container">', unsafe_allow_html=True)
+        .form-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #06b6d4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Enhanced text visibility */
+        .stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown div,
+        .stRadio, .stRadio label, .stRadio span, .stRadio div,
+        .stCheckbox, .stCheckbox label, .stCheckbox span, .stCheckbox div,
+        .stTextInput, .stTextInput label, .stTextInput span, .stTextInput div,
+        .stButton, .stButton label, .stButton span, .stButton div,
+        .stSubheader, label, p, span, div, h1, h2, h3, h4, h5, h6,
+        .stSelectbox, .stSelectbox label, .stSelectbox span, .stSelectbox div {
+            color: #f1f5f9 !important;
+            font-weight: 500;
+        }
+        
+        /* Dark Selectbox styling */
+        .stSelectbox > div > div > div {
+            border-radius: 12px !important;
+            border: 2px solid #475569 !important;
+            background: linear-gradient(145deg, #1e293b, #334155) !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+            transition: all 0.3s ease !important;
+            color: #f1f5f9 !important;
+        }
+        
+        .stSelectbox > div > div > div:hover {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2) !important;
+        }
+        
+        /* Modern Tab styling */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 1rem;
+            border-bottom: 2px solid #475569;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px 12px 0 0;
+            padding: 0.5rem;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            font-weight: 600;
+            color: #94a3b8 !important;
+            padding: 1rem 1.5rem !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            background: transparent !important;
+        }
+        
+        .stTabs [data-baseweb="tab"]:hover {
+            background: rgba(6, 182, 212, 0.1) !important;
+            color: #06b6d4 !important;
+        }
+        
+        .stTabs [aria-selected="true"] {
+            background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4) !important;
+        }
+        
+        /* Section headers */
+        .section-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #06b6d4 !important;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            border-radius: 2px;
+        }
+        
+        /* Enhanced Input fields */
+        .stTextInput > label {
+            font-weight: 600 !important;
+            color: #f1f5f9 !important;
+            font-size: 1rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .stTextInput > div > div > input {
+            border-radius: 12px !important;
+            border: 2px solid #475569 !important;
+            padding: 1rem 1.25rem !important;
+            color: #f1f5f9 !important;
+            background: linear-gradient(145deg, #1e293b, #334155) !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+            transition: all 0.3s ease !important;
+            font-size: 1rem !important;
+        }
+        
+        .stTextInput > div > div > input:focus {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2), inset 0 2px 4px rgba(0,0,0,0.3) !important;
+        }
+        
+        .stTextInput > div > div > input::placeholder {
+            color: #64748b !important;
+        }
+        
+        /* Modern Button styling */
+        .stButton > button {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            padding: 1rem 2rem !important;
+            border-radius: 12px !important;
+            width: 100% !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            margin-top: 1.5rem !important;
+            font-size: 1.1rem !important;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3) !important;
+        }
+        
+        .stButton > button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4) !important;
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%) !important;
+        }
+        
+        .stButton > button:active {
+            transform: translateY(0) !important;
+        }
+        
+        /* Enhanced Success/error messages */
+        .stAlert {
+            border-radius: 12px !important;
+            padding: 1.25rem !important;
+            margin-top: 1rem !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+        }
+        
+        .stAlert[data-baseweb="notification"] {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            color: white !important;
+        }
+        
+        /* Enhanced Radio and Checkbox */
+        .stRadio > label, .stCheckbox > label {
+            font-weight: 600 !important;
+            color: #f1f5f9 !important;
+            margin-bottom: 0.75rem !important;
+        }
+        
+        /* Radio button styling */
+        .stRadio [role="radiogroup"] > label {
+            background: rgba(30, 41, 59, 0.6) !important;
+            border: 2px solid #475569 !important;
+            border-radius: 8px !important;
+            padding: 0.75rem 1rem !important;
+            margin: 0.25rem 0 !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .stRadio [role="radiogroup"] > label:hover {
+            border-color: #06b6d4 !important;
+            background: rgba(6, 182, 212, 0.1) !important;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 1rem;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        /* Sidebar styling */
+        .css-1d391kg {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        
+        /* Metrics styling */
+        .metric-container {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Add subtle animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(6, 182, 212, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+            }
+        }
+        
+        .form-container {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .main-title {
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .form-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .stTabs [data-baseweb="tab-list"] {
+                gap: 0.5rem;
+            }
+            
+            .stTabs [data-baseweb="tab"] {
+                padding: 0.75rem 1rem !important;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Fix for white text in dark theme */
+        .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, 
+        .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+            color: #06b6d4 !important;
+        }
+        
+        /* Dataframe styling */
+        .stDataFrame {
+            background: rgba(30, 41, 59, 0.8) !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='main-title'>ACADEMICS CERTIFICATE SYSTEM</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subheading'>Secure verification for academic credentials</p>", unsafe_allow_html=True)
+    st.markdown("<div  class='main-title'><h1>ACADEMICS CERTIFICATE SYSTEM</h1><p class='subheading'>Secure verification of academic certificates</p></div>", unsafe_allow_html=True)
+    st.markdown("<h2 class='form-title'>Create a New Account</h2>", unsafe_allow_html=True)
 
-st.markdown("<div class='form-container'>", unsafe_allow_html=True)
-st.markdown("<h2 class='form-title'>Create a New Account</h2>", unsafe_allow_html=True)
-
-with st.form("registration_form", clear_on_submit=False):
-    st.markdown("<div class='section-header'>Select account type:</div>", unsafe_allow_html=True)
-    
-    profile_type = st.radio(
-        "Account Type",
-        ["Institute", "Verifier"],
-        horizontal=True,
-        label_visibility="collapsed"
-    )
-    
-    if 'profile' not in st.session_state:
-        st.session_state.profile = profile_type
-    else:
-        st.session_state.profile = profile_type
-    
-    st.markdown("<hr style='margin: 20px 0; border-color: #e2e8f0;'>", unsafe_allow_html=True)
-    
-    st.markdown("<div class='section-header'>Account Information</div>", unsafe_allow_html=True)
-    
-    email = st.text_input(
-        "Email Address", 
-        placeholder="Enter your email address"
-    )
-    
-    password = st.text_input(
-        "Password", 
-        type="password", 
-        placeholder="Create a secure password (min. 8 characters)"
-    )
-    
-    confirm_password = st.text_input(
-        "Confirm Password", 
-        type="password", 
-        placeholder="Re-enter your password"
-    )
-    
-    st.markdown("<div style='margin-top: 20px; margin-bottom: 20px; padding: 10px; background-color: #f1f5f9; border-radius: 5px; border: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
-    terms_agree = st.checkbox("I agree to the Terms of Service and Privacy Policy", key="terms_checkbox")
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    submit_button = st.form_submit_button("Register Account")
-    
-    if submit_button:
-        if not email or not password or not confirm_password:
-            st.error("Please fill in all required fields")
-        elif password != confirm_password:
-            st.error("Passwords do not match")
-        elif len(password) < 8:
-            st.warning("Password should be at least 8 characters")
-        elif not terms_agree:
-            st.warning("Please agree to the Terms and Privacy Policy")
+    with st.form("registration_form", clear_on_submit=False):
+        st.markdown("<div class='section-header'>Select account type:</div>", unsafe_allow_html=True)
+        
+        profile_type = st.radio(
+            "Account Type",
+            ["Institute", "Verifier"],
+            horizontal=True,
+            label_visibility="collapsed"
+        )
+        
+        if 'profile' not in st.session_state:
+            st.session_state.profile = profile_type
         else:
-            result = register(email, password)
-            if result == "success":
-                st.success("Registration successful! Redirecting to your dashboard...")
-                st.balloons()
-                
-                if st.session_state.profile == "Institute":
-                    switch_page("institute")
-                else:
-                    switch_page("verifier")
+            st.session_state.profile = profile_type
+        
+        st.markdown("<hr style='margin: 20px 0; border-color: #e2e8f0;'>", unsafe_allow_html=True)
+        
+        st.markdown("<div class='section-header'>Account Information</div>", unsafe_allow_html=True)
+        
+        email = st.text_input(
+            "Email Address", 
+            placeholder="Enter your email address"
+        )
+        
+        password = st.text_input(
+            "Password", 
+            type="password", 
+            placeholder="Create a secure password (min. 8 characters)"
+        )
+        
+        confirm_password = st.text_input(
+            "Confirm Password", 
+            type="password", 
+            placeholder="Re-enter your password"
+        )
+        
+        st.markdown("<div style='margin-top: 20px; margin-bottom: 20px; padding: 10px; background-color: #f1f5f9; border-radius: 5px; border: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
+        terms_agree = st.checkbox("I agree to the Terms of Service and Privacy Policy", key="terms_checkbox")
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        submit_button = st.form_submit_button("Register Account")
+        
+        if submit_button:
+            if not email or not password or not confirm_password:
+                st.error("Please fill in all required fields")
+            elif password != confirm_password:
+                st.error("Passwords do not match")
+            elif len(password) < 8:
+                st.warning("Password should be at least 8 characters")
+            elif not terms_agree:
+                st.warning("Please agree to the Terms and Privacy Policy")
             else:
-                st.error(f"Registration failed: {result}")
+                result = register(email, password)
+                if result == "success":
+                    st.success("Registration successful! Redirecting to your dashboard...")
+                    st.balloons()
+                    
+                    if st.session_state.profile == "Institute":
+                        switch_page("institute")
+                    else:
+                        switch_page("verifier")
+                else:
+                    st.error(f"Registration failed: {result}")
 
-st.markdown("<div class='login-link'><span style='color: #1e2c4c;'>Already have an account?</span> <a href='javascript:void(0);' onclick='window.location.href=\"login\"' style='color: #1e40af; font-weight: 600;'>Log in here</a></div>", unsafe_allow_html=True)
+    st.markdown("<div class='login-link'><span style='color: #1e2c4c;'>Already have an account?</span> <a href='javascript:void(0);' onclick='window.location.href=\"login\"' style='color: #1e40af; font-weight: 600;'>Log in here</a></div>", unsafe_allow_html=True)
 
-if st.button("Already have an account? Log in", key="login_button"):
-    switch_page("login")
+    if st.button("Already have an account? Log in", key="login_button"):
+        switch_page("login")
 
-st.markdown('</div>', unsafe_allow_html=True)  
+    st.markdown('<div class="footer" style="color: #1e2c4c;">Academics Certificate System</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="footer" style="color: #1e2c4c;">Academics Certificate System</div>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True) 
+run()

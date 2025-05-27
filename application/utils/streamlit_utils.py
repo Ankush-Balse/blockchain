@@ -19,10 +19,6 @@ def displayPDF(file):
 
 def view_certificate(certificate_id):
     try:
-        print("certificate_id =", certificate_id)
-        print("contract = ", contract)
-        print("functions = ", contract.functions)
-
         result = contract.functions.getCertificate(certificate_id).call()
         print("Smart contract result =", result)
 

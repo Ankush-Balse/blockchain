@@ -3,7 +3,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 import pdfplumber
 
-def generate_certificate(output_path, uid, candidate_name, course_name, org_name, institute_logo_path):
+def generate_certificate(output_path, uid, candidate_name, name, org_name, institute_logo_path, is_course = True):
     # Create a PDF document
     doc = SimpleDocTemplate(output_path, pagesize=letter)
 
@@ -47,12 +47,20 @@ def generate_certificate(output_path, uid, candidate_name, course_name, org_name
         alignment=1
     )
 
-    recipient_text = f"This is to certify that<br/><br/>\
-                     <font color='red'> {candidate_name} </font><br/>\
-                     with UID <br/> \
-                    <font color='red'> {uid} </font> <br/><br/>\
-                     has successfully completed the course:<br/>\
-                     <font color='blue'> {course_name} </font>"
+    if is_course:
+        recipient_text = f"This is to certify that<br/><br/>\
+                        <font color='red'> {candidate_name} </font><br/>\
+                        with UID <br/> \
+                        <font color='red'> {uid} </font> <br/><br/>\
+                        has successfully completed the course:<br/>\
+                        <font color='blue'> {name} </font>"
+    else:
+        recipient_text = f"This is to certify that<br/><br/>\
+                        <font color='red'> {candidate_name} </font><br/>\
+                        with UID <br/> \
+                        <font color='red'> {uid} </font> <br/><br/>\
+                        has submitted the certificate:<br/>\
+                        <font color='blue'> {name} </font>"
 
     recipient = Paragraph(recipient_text, recipient_style)
     elements.extend([recipient, Spacer(1, 12)])
@@ -66,9 +74,7 @@ def generate_certificate(output_path, uid, candidate_name, course_name, org_name
 def extract_certificate(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
         # Extract text from each page
-        text = ""
-        for page in pdf.pages:
-            text += page.extract_text()
+        text = pdf.pages[0].extract_text()
         lines = text.splitlines()
 
         org_name = lines[0]
@@ -76,5 +82,7 @@ def extract_certificate(pdf_path):
         uid = lines[5]
         course_name = lines[-1]
 
-        return (uid, candidate_name, course_name, org_name)
+        is_course = len(pdf.pages) == 1
+
+        return (uid, candidate_name, course_name, org_name, is_course)
     

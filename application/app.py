@@ -8,50 +8,52 @@ st.set_page_config(layout="wide", initial_sidebar_state="collapsed", page_title=
 # hide_sidebar()
 remove_whitespaces()
 
+
 st.markdown("""
     <style>
-    /* Global Reset */
+    /* Global Reset with Dark Theme */
     .stApp {
-        background-color: #f8f9fa !important;
-        color: #212529 !important;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+        color: #f8fafc !important;
+        min-height: 100vh;
     }
-    
+
     body {
         font-family: 'Segoe UI', 'Roboto', sans-serif;
         margin: 0;
         padding: 0;
     }
-    
-    /* Container for better responsiveness */
+
+    /* Container */
     .content-container {
         max-width: 1440px;
         margin: 0 auto;
         padding: 1rem;
     }
-    
-    /* Main title */
+
+    /* Titles */
     .main-title {
         text-align: center;
         font-size: 3.5rem;
         font-weight: 700;
-        color: #102040;
+        color: #06b6d4;
         margin-bottom: 0.5rem;
         letter-spacing: -0.02em;
         text-transform: uppercase;
     }
-    
-    /* Subheading */
+
     .subheading {
         text-align: center;
         font-size: 1.5rem;
-        color: #495057;
+        color: #94a3b8;
         margin-bottom: 3rem;
         font-weight: 400;
     }
-    
-    /* Custom role container styles */
+
+    /* Role Card */
     .role-card {
-        border: 1px solid #dee2e6;
+        background-color: rgba(30, 41, 59, 0.8);
+        border: 1px solid #475569;
         border-radius: 8px;
         padding: 0;
         margin-bottom: 20px;
@@ -60,24 +62,25 @@ st.markdown("""
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease;
+        color: #f1f5f9;
     }
-    
+
     .role-card:hover {
-        border-color: #1a4b8c;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-color: #06b6d4;
+        box-shadow: 0 8px 16px rgba(6, 182, 212, 0.2);
         transform: translateY(-5px);
     }
-    
+
     .role-header {
-        background-color: #f8f9fa;
+        background-color: #1e293b;
         padding: 15px;
         font-size: 1.5rem;
         font-weight: 600;
-        color: #0d2240;
+        color: #06b6d4;
         text-align: center;
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 1px solid #334155;
     }
-    
+
     .role-content {
         padding: 25px;
         display: flex;
@@ -87,26 +90,23 @@ st.markdown("""
         flex-grow: 1;
         text-align: center;
     }
-    
 
     .role-content > div {
         display: flex !important;
         justify-content: center !important;
         width: 100% !important;
-        
     }
-    
-    /* Center-align images */
+
     .role-content img {
         display: block !important;
         margin: 0 auto !important;
         max-width: 100% !important;
     }
-    
-    /* Button styling */
+
+    /* Buttons */
     .stButton > button {
-        background-color: #1a4b8c !important;
-        color: white !important;
+        background-color: #06b6d4 !important;
+        color: #0f172a !important;
         border-radius: 6px !important;
         padding: 16px 40px !important;
         font-size: 1.2rem !important;
@@ -120,27 +120,38 @@ st.markdown("""
         margin-left: auto !important;
         margin-right: auto !important;
     }
-    
+
     .stButton > button:hover {
-        background-color: #0d3663 !important;
+        background-color: #0891b2 !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 6px 8px rgba(6, 182, 212, 0.3) !important;
     }
-    
-    /* Hide default Streamlit elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    .css-18e3th9 {padding-top: 0;}
-    .css-1d391kg {padding-top: 1rem;}
-    
+
     /* Footer */
     .footer {
         text-align: center;
         margin-top: 3rem;
         margin-bottom: 1rem;
-        color: #6c757d;
+        color: #94a3b8;
         font-size: 0.85rem;
     }
+
+    /* Text Visibility Fix */
+    .stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown div,
+    .stRadio, .stRadio label, .stRadio span, .stRadio div,
+    .stCheckbox, .stCheckbox label, .stCheckbox span, .stCheckbox div,
+    .stTextInput, .stTextInput label, .stTextInput span, .stTextInput div,
+    .stButton, .stButton label, .stButton span, .stButton div,
+    .stSubheader, label, p, span, div, h1, h2, h3, h4, h5, h6,
+    .stSelectbox, .stSelectbox label, .stSelectbox span, .stSelectbox div {
+        color: #f1f5f9 !important;
+    }
+
+    /* Hide Streamlit default UI */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    .css-18e3th9 {padding-top: 0;}
+    .css-1d391kg {padding-top: 1rem;}
     </style>
 """, unsafe_allow_html=True)
 
